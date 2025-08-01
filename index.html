@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruthGuard AI - Blockchain News Verification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: linear-gradient(135deg, #1a1f35 0%, #2a3a5c 100%);
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .prediction-card {
+            transition: all 0.3s ease;
+        }
+        .prediction-card:hover {
+            transform: translateY(-5px);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-white">
+    <nav class="glass fixed w-full z-50 px-6 py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="bi bi-shield-check text-3xl"></i>
+                <span class="text-xl font-bold">TruthGuard AI</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#home" class="hover:text-blue-400 transition">Home</a>
+                <a href="#predict" class="hover:text-blue-400 transition">Verify News</a>
+                <a href="#about" class="hover:text-blue-400 transition">About</a>
+                <a href="#history" class="hover:text-blue-400 transition">History</a>
+            </div>
+            <button class="glass px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                Connect Wallet
+            </button>
+        </div>
+    </nav>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section id="home" class="container mx-auto px-6 py-20">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">Detect Fake News with AI & Blockchain</h1>
+                <p class="text-xl text-gray-300 mb-8">Powered by advanced AI and secured by blockchain technology</p>
+                <button onclick="scrollToPredict()" class="glass px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-600 transition pulse-animation">
+                    Start Verification
+                </button>
+            </div>
+        </section>
+
+        <!-- Prediction Section -->
+        <section id="predict" class="container mx-auto px-6 py-20">
+            <div class="glass rounded-xl p-8 max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6">Verify News Article</h2>
+                <div class="mb-6">
+                    <textarea id="newsInput" class="w-full bg-gray-800 rounded-lg p-4 text-white" rows="6" placeholder="Paste your news article here..."></textarea>
+                </div>
+                <div class="flex flex-wrap gap-4 justify-between items-center">
+                    <button onclick="uploadFile()" class="glass px-6 py-3 rounded-lg">
+                        <i class="bi bi-upload me-2"></i>Upload File
+                    </button>
+                    <button onclick="verifyNews()" class="bg-blue-600 px-6 py-3 rounded-lg hover:bg-blue-700 transition">
+                        Verify Now
+                    </button>
+                </div>
+                <div id="result" class="mt-8 hidden">
+                    <div class="glass rounded-lg p-6 text-center">
+                        <div id="resultIcon" class="text-6xl mb-4"></div>
+                        <h3 id="resultText" class="text-2xl font-bold mb-2"></h3>
+                        <p id="confidence" class="text-gray-300"></p>
+                        <div class="mt-4 text-sm">
+                            <p>Verification Hash: <span id="verificationHash" class="font-mono"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="container mx-auto px-6 py-20">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="glass rounded-xl p-8">
+                    <h2 class="text-3xl font-bold mb-6">How It Works</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <i class="bi bi-1-circle-fill text-2xl text-blue-400"></i>
+                            <p>Advanced AI analyzes news content for authenticity</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <i class="bi bi-2-circle-fill text-2xl text-blue-400"></i>
+                            <p>Blockchain ensures immutable verification records</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <i class="bi bi-3-circle-fill text-2xl text-blue-400"></i>
+                            <p>Get instant results with confidence scores</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass rounded-xl p-8">
+                    <h2 class="text-3xl font-bold mb-6">Technology Stack</h2>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center p-4">
+                            <i class="bi bi-cpu text-4xl text-blue-400"></i>
+                            <p class="mt-2">AI Model</p>
+                        </div>
+                        <div class="text-center p-4">
+                            <i class="bi bi-diagram-3 text-4xl text-blue-400"></i>
+                            <p class="mt-2">Blockchain</p>
+                        </div>
+                        <div class="text-center p-4">
+                            <i class="bi bi-shield-check text-4xl text-blue-400"></i>
+                            <p class="mt-2">Security</p>
+                        </div>
+                        <div class="text-center p-4">
+                            <i class="bi bi-graph-up text-4xl text-blue-400"></i>
+                            <p class="mt-2">Analytics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="glass mt-20 py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 TruthGuard AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function scrollToPredict() {
+            document.getElementById('predict').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function uploadFile() {
+            alert('File upload functionality will be implemented here');
+        }
+
+        function verifyNews() {
+            const newsText = document.getElementById('newsInput').value;
+            if (!newsText.trim()) {
+                alert('Please enter or upload news content');
+                return;
+            }
+
+            // Simulate API call with random result
+            const result = Math.random() > 0.5;
+            const confidence = (Math.random() * 20 + 80).toFixed(2);
+            const hash = '0x' + Math.random().toString(16).substr(2, 40);
+
+            const resultDiv = document.getElementById('result');
+            const resultIcon = document.getElementById('resultIcon');
+            const resultText = document.getElementById('resultText');
+            const confidenceEl = document.getElementById('confidence');
+            const verificationHash = document.getElementById('verificationHash');
+
+            resultDiv.classList.remove('hidden');
+            
+            if (result) {
+                resultIcon.innerHTML = '<i class="bi bi-check-circle-fill text-green-500"></i>';
+                resultText.textContent = 'REAL NEWS';
+                resultText.className = 'text-2xl font-bold mb-2 text-green-500';
+            } else {
+                resultIcon.innerHTML = '<i class="bi bi-x-circle-fill text-red-500"></i>';
+                resultText.textContent = 'FAKE NEWS';
+                resultText.className = 'text-2xl font-bold mb-2 text-red-500';
+            }
+
+            confidenceEl.textContent = `Confidence: ${confidence}%`;
+            verificationHash.textContent = hash;
+        }
+    </script>
+<script>document.body.addEventListener('wheel', e => { if (!e.ctrlKey) return; e.preventDefault(); return }, { passive: false })</script>
+	</body>
+</html>
